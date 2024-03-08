@@ -34,6 +34,7 @@ void showFiles(int user_security_level) {
 		string file_name = "";
 		string sec_level = "";
 		while (dummy_files >> file_access >> file_name >> sec_level) {
+	
 			int secLevelNumber = stoi(sec_level);
 
 			file_access_vec.push_back(file_access);
@@ -43,7 +44,7 @@ void showFiles(int user_security_level) {
 
 		cout << "Read/write   File name      Security Level" << endl;
 		for (int i = 0; i < file_access_vec.size(); i++) {
-			if (user_security_level >= file_sec_level_vec[i] && file_access_vec[i] == "r") {
+			if (file_sec_level_vec[i] <= user_security_level && file_access_vec[i] == "r") {
 				cout << file_access_vec[i] << "     -     " << file_name_vec[i] << "     -     " << file_sec_level_vec[i] << endl;
 			}
 			else if (file_sec_level_vec[i] >= user_security_level && file_access_vec[i] == "w") {
@@ -75,7 +76,7 @@ int main() {
 			int user_index = 0;
 			for (int i = 0; i < 4; i++) {
 				if (securitylevel == users[i] && password == user_passwords[i]) {
-					user_index = i;
+					user_index = i+1;
 				}
 			}
 			showFiles(user_index);
